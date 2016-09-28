@@ -70,6 +70,37 @@ class Stack
     result
   end
 
+  def self.rotate(stack, counter = 1)
+    total_items_count = Stack.length(stack)
+    if total_items_count == 0
+      return nil
+    end
+    temp1 = Stack.new(total_items_count - counter)
+    temp2 = Stack.new(counter)
+
+    for i in (0...total_items_count - counter) do
+      item = Stack.pop(stack)
+      Stack.push(temp1, item)
+    end
+
+    remaining_items = Stack.items(stack)
+    for i in (remaining_items) do
+      item = Stack.pop(stack)
+      Stack.push(temp2, item)
+    end
+
+    for i in (0...total_items_count - counter) do
+      item = Stack.pop(temp1)
+      Stack.push(stack, item)
+    end
+
+    for i in (0...counter) do
+      item = Stack.pop(temp2)
+      Stack.push(stack, item)
+    end
+    stack.items
+  end
+
   def self.profile
     page = Wikipedia.find( 'Stack (abstract data type)' )
     puts page.summary.split("\n").map { |a| a.strip }.join(" ").gsub(/{.+}/, "")

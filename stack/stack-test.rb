@@ -1,3 +1,7 @@
+require 'simplecov'
+SimpleCov.start
+SimpleCov.command_name 'Unit Tests'
+
 require "./stack.rb"
 require "../test/test.rb"
 include Test
@@ -65,4 +69,34 @@ test "Stack.peak(stack)",
     Stack.push(stack, "a")
     Stack.peak(stack)
     Stack.items(stack)
+    )
+
+test "Stack.rotate(stack)",
+  expected = [2, 3, 1],
+  actual   =
+    (
+    stack = Stack.new(3)
+    Stack.push(stack, 1)
+    Stack.push(stack, 2)
+    Stack.push(stack, 3)
+    Stack.rotate(stack)
+    )
+
+test "Stack.rotate(stack, number)",
+  expected = [3, 1, 2],
+  actual   =
+    (
+    stack = Stack.new(3)
+    Stack.push(stack, 1)
+    Stack.push(stack, 2)
+    Stack.push(stack, 3)
+    Stack.rotate(stack, 2)
+    )
+
+test "Stack.rotate(stack, number),when stack is empty",
+  expected = nil,
+  actual   =
+    (
+    stack = Stack.new(3)
+    Stack.rotate(stack, 2)
     )

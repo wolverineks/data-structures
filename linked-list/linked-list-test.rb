@@ -1,3 +1,7 @@
+require 'simplecov'
+SimpleCov.start
+SimpleCov.command_name 'Unit Tests'
+
 require "./node.rb"
 require "../test/test.rb"
 include Test
