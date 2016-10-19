@@ -69,6 +69,14 @@ class Node
     node
   end
 
+  def self.reverse(node, previous_node = nil)
+    return previous_node unless node
+
+    next_node = Node.next(node)
+    Node.reference(node, previous_node)
+    reverse(next_node, node)
+  end
+
 end
 
 # CHARACTERISTCS

@@ -112,3 +112,42 @@ test "Node.last",
     node = Node.last(node1)
     node.value
     )
+
+test "Node.reverse",
+  expected = 3,
+  actual   =
+    (
+    node1 = Node.new(1)
+    node2 = Node.new(2)
+    node3 = Node.new(3)
+    Node.reference(node1, node2)
+    Node.reference(node2, node3)
+    new_root = Node.reverse(node1)
+    new_root.value
+    )
+
+test "Node.reverse",
+  expected = 3,
+  actual   =
+    (
+    node1 = Node.new(1)
+    node2 = Node.new(2)
+    node3 = Node.new(3)
+    Node.reference(node1, node2)
+    Node.reference(node2, node3)
+    new_root = Node.reverse(node1)
+    Node.value(new_root)
+    )
+
+test "Node.reverse",
+  expected = 1,
+  actual   =
+    (
+    node1 = Node.new(1)
+    node2 = Node.new(2)
+    node3 = Node.new(3)
+    Node.reference(node1, node2)
+    Node.reference(node2, node3)
+    new_root = Node.reverse(node1)
+    Node.value(Node.last(new_root))
+    )
