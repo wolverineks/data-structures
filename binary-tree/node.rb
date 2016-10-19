@@ -1,10 +1,9 @@
 class Node
   require 'wikipedia'
-  attr_accessor :value, :children
+  attr_accessor :value, :children, :left, :right
 
-  def initialize(value, children = [])
+  def initialize(value)
     @value = value
-    @children = children
   end
 
   def self.value(node)
@@ -12,24 +11,43 @@ class Node
   end
 
   def self.children(node)
-    node.children
+    [node.left, node.right]
+  end
+
+  def self.left(node)
+    node.left
+  end
+
+  def self.right(node)
+    node.right
   end
 
   def self.push(node1, node2)
-    return nil if Node.children(node1).length >= 2
-    children(node1) << node2
+    if node1.value < node2.value
+      if node1.right == nil
+        node1.right = node2
+      else
+        push(node1.right, node2)
+      end
+    else
+      if node1.left == nil
+        node1.left = node2
+      else
+        push(node1.left, node2)
+      end
+    end
   end
 
-  def self.pop(node, which_node = :left)
-    if which_node == :left
-      result = children(node)[0]
-      children(node)[0] = nil
-    else
-      result = children(node)[1]
-      children(node)[1] = nil
-    end
-    result
-  end
+  # def self.pop(node, which_node = :left)
+  #   if which_node == :left
+  #     result = children(node)[0]
+  #     children(node)[0] = nil
+  #   else
+  #     result = children(node)[1]
+  #     children(node)[1] = nil
+  #   end
+  #   result
+  # end
 
   def self.total_nodes(node)
     total = 1
@@ -43,24 +61,10 @@ class Node
     total
   end
 
-  # def self.linsert(node1, node2)
-  #   temp = pop(node1, :left)
-  #   push(node1, node2)
-  #   push(node1, temp)
-  #   swap_children(node1)
+  # def self.swap_children(node)
+  #   temp = pop(node, :left)
+  #   push(node, temp)
   # end
-  #
-  # def self.rinsert(node1, node2)
-  #   temp = pop(node1, :right)
-  #   push(node1, node2)
-  #   push(node1, temp)
-  #   swap_children(node1)
-  # end
-
-  def self.swap_children(node)
-    temp = pop(node, :left)
-    push(node, temp)
-  end
 
   def self.profile
     page = Wikipedia.find( 'Binary Tree' )
