@@ -3,8 +3,10 @@ SimpleCov.start
 SimpleCov.command_name 'Unit Tests'
 
 require "./stack.rb"
-require "../test/test.rb"
-include Test
+# require "../test/test.rb"
+# include Test
+require 'basic_test'
+include BasicTest
 
 test "Stack.items(stack)",
   expected = [nil, nil, nil],

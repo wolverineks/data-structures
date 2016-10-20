@@ -3,8 +3,10 @@ SimpleCov.start
 SimpleCov.command_name 'Unit Tests'
 
 require "./node.rb"
-require "../test/test.rb"
-include Test
+# require "../test/test.rb"
+# include Test
+require 'basic_test'
+include BasicTest
 
 test "Node.value(node)",
   expected = 1,
